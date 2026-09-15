@@ -6,10 +6,6 @@ Pipeline: `Ingest (API → data/raw) → Clean (→ data/interim) → Features (
 
 ## Project Structure
 
-## Project Structure
-
-## Project Structure
-
 ```text
 f1_prediction/
 ├── f1_prediction/              # Python package (pipeline code)

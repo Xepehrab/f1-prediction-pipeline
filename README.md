@@ -6,6 +6,11 @@ Pipeline: `Ingest (API → data/raw) → Clean (→ data/interim) → Features (
 
 ## Project Structure
 
+## Project Structure
+
+## Project Structure
+
+```text
 f1_prediction/
 ├── f1_prediction/              # Python package (pipeline code)
 │   ├── __init__.py
@@ -13,7 +18,7 @@ f1_prediction/
 │   ├── cli.py                  # CLI: ingest / prepare / build
 │   ├── config.py               # Paths, API base, year range (2018-2026), lineage
 │   ├── ingest.py               # Jolpica pagination + caching (0.35s pause, 4 req/s)
-│   ├── clean.py                # join results+qualifying+sprint → driver_race
+│   ├── clean.py                # join results+qualifying+sprint -> driver_race
 │   ├── features.py             # rolling features with shift(1) (no leakage)
 │   └── tracks.py               # static circuit meta (is_street, tyre_stress...)
 ├── data/
@@ -26,13 +31,15 @@ f1_prediction/
 │   │   ├── qualifying.csv      # Q1/Q2/Q3 times
 │   │   └── sprint.csv          # sprint results (when available)
 │   └── processed/
-│       ├── driver_race.csv         # joined, standardized table (1 row = driver × race)
+│       ├── driver_race.csv         # joined, standardized table (1 row = driver x race)
 │       ├── features.csv            # model-ready matrix
 │       ├── feature_dictionary.csv  # id / feature / target roles
 │       └── qa_report.csv           # row counts, missingness, DNF rate
 ├── requirements.txt            # pandas>=2.0, requests>=2.31
-├── run_pipeline.py             # shortcut → f1_prediction.cli:main
+├── run_pipeline.py             # shortcut -> f1_prediction.cli:main
 └── README.md
+```
+
 
 ## Setup
 bash

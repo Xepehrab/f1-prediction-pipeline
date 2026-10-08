@@ -3,29 +3,12 @@
 from __future__ import annotations
 
 import argparse
-import importlib.util
-import sys
-from pathlib import Path
 
 from .clean import clean_driver_race
 from .config import DEFAULT_END_YEAR, DEFAULT_START_YEAR
 from .features import engineer_features
 from .ingest import ingest, load_interim
-
-
-def _load_model_module():
-    """Load model.py from the project root (it lives outside the package)."""
-    model_path = Path(__file__).resolve().parent.parent / "model.py"
-    if not model_path.exists():
-        raise FileNotFoundError(
-            f"model.py not found at {model_path}. "
-            "Make sure model.py is in the project root directory."
-        )
-    spec = importlib.util.spec_from_file_location("model", model_path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules.setdefault("model", module)
-    spec.loader.exec_module(module)
-    return module
+from .model import predict_specific_race, train_baseline_model
 
 
 def build(start_year: int, end_year: int, skip_ingest: bool = False) -> None:
@@ -87,11 +70,9 @@ def main(argv: list[str] | None = None) -> None:
     elif args.command == "build":
         build(args.start_year, args.end_year, skip_ingest=args.skip_ingest)
     elif args.command == "train":
-        model = _load_model_module()
-        model.train_baseline_model(target_col=args.target, split_year=args.split_year)
+        train_baseline_model(target_col=args.target, split_year=args.split_year)
     elif args.command == "predict":
-        model = _load_model_module()
-        model.predict_specific_race(
+        predict_specific_race(
             season=args.season,
             round_num=args.round_num,
             target_col=args.target,

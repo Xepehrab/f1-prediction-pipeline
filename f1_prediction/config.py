@@ -1,3 +1,5 @@
+"""Shared paths, API settings, year range, and constructor lineage."""
+
 from pathlib import Path
 
 PACKAGE_ROOT = Path(__file__).resolve().parent.parent
@@ -5,6 +7,7 @@ DATA_DIR = PACKAGE_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 INTERIM_DIR = DATA_DIR / "interim"
 PROCESSED_DIR = DATA_DIR / "processed"
+MODEL_DIR = DATA_DIR / "models"
 
 JOLPICA_BASE = "https://api.jolpi.ca/ergast/f1"
 USER_AGENT = "f1-prediction-pipeline/0.1 (local research)"
